@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './styles/App.css';
-
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Features from './components/Features';
@@ -26,12 +25,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // Apply dark mode class to body
-    if (darkMode) {
-      document.body.classList.add('dark-mode');
-    } else {
-      document.body.classList.remove('dark-mode');
-    }
+    // Apply data-theme attribute to body
+    document.body.setAttribute('data-theme', darkMode ? 'dark' : 'light');
     
     // Save theme preference
     localStorage.setItem('darkMode', JSON.stringify(darkMode));
@@ -51,7 +46,7 @@ function App() {
   }
 
   return (
-    <div className={`App ${darkMode ? 'dark' : 'light'}`}>
+    <div className="App">
       <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       <main>
         <Hero />

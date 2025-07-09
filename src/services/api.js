@@ -1,5 +1,5 @@
 // Base API configuration
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://saaslanding-page.onrender.com/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://saaslanding-page.onrender.com';
 
 // Generic API request function
 async function makeRequest(endpoint, options = {}) {
