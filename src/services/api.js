@@ -1,5 +1,5 @@
 // Base API configuration
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://saaslanding-page.onrender.com';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://saaslanding-page.onrender.com/api';
 
 // Generic API request function
 async function makeRequest(endpoint, options = {}) {
@@ -42,7 +42,7 @@ export const apiService = {
           title: 'Welcome to SniperThink',
           subtitle: 'Transform your business with our innovative solutions',
           cta: 'Get Started',
-          backgroundImage: 'https://images.unsplash.com/photo-1451187,1v:1.5,f_auto/quality/eco-friendly%2C%20fast%2C%20and%20affordable%20way%20to%20grow',
+          backgroundImage: 'https://images.unsplash.com/photo-1451187508271-5c5f59289596?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80',
         },
         {
           id: 2,
@@ -56,7 +56,7 @@ export const apiService = {
           title: 'Join Thousands of Users',
           subtitle: 'Trusted by companies worldwide for their success',
           cta: 'Start Free Trial',
-          backgroundImage: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
+          backgroundImage: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
         }
       ];
     }
@@ -86,6 +86,24 @@ export const apiService = {
           title: '24/7 Support',
           description: 'Round-the-clock support from our expert team',
           icon: '💬'
+        },
+        {
+          id: 4,
+          title: 'Fast Performance',
+          description: 'Lightning-fast response times for all operations',
+          icon: '⚡'
+        },
+        {
+          id: 5,
+          title: 'Cloud Integration',
+          description: 'Seamless integration with popular cloud platforms',
+          icon: '☁️'
+        },
+        {
+          id: 6,
+          title: 'Analytics',
+          description: 'Comprehensive analytics and reporting tools',
+          icon: '📊'
         }
       ];
     }
@@ -102,19 +120,19 @@ export const apiService = {
           id: 1,
           name: 'Basic',
           price: '$9/month',
-          features: ['Feature 1', 'Feature 2', 'Feature 3']
+          features: ['5 Projects', '1 User', 'Basic Support', '1GB Storage']
         },
         {
           id: 2,
           name: 'Pro',
           price: '$29/month',
-          features: ['All Basic features', 'Feature 4', 'Feature 5', 'Priority support']
+          features: ['Unlimited Projects', '5 Users', 'Priority Support', '10GB Storage', 'Advanced Analytics']
         },
         {
           id: 3,
           name: 'Enterprise',
           price: 'Contact us',
-          features: ['All Pro features', 'Custom integrations', 'Dedicated support', 'SLA guarantee']
+          features: ['Unlimited Everything', 'Unlimited Users', 'Dedicated Support', 'Custom Storage', 'SLA Guarantee', 'Custom Integrations']
         }
       ];
     }
@@ -122,10 +140,55 @@ export const apiService = {
 
   // Contact form submission
   async submitContact(formData) {
-    return await makeRequest('/api/contact', {
-      method: 'POST',
-      body: JSON.stringify(formData),
-    });
+    try {
+      return await makeRequest('/api/contact', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+      });
+    } catch (error) {
+      console.error('Contact form submission failed:', error);
+      throw error;
+    }
+  },
+
+  // Get contact by ID
+  async getContact(id) {
+    try {
+      return await makeRequest(`/api/contact/${id}`);
+    } catch (error) {
+      console.error('Failed to get contact:', error);
+      throw error;
+    }
+  },
+
+  // Get all contacts (for admin purposes)
+  async getAllContacts() {
+    try {
+      return await makeRequest('/api/contacts');
+    } catch (error) {
+      console.error('Failed to get contacts:', error);
+      throw error;
+    }
+  },
+
+  // Get slide by ID
+  async getSlide(id) {
+    try {
+      return await makeRequest(`/api/slides/${id}`);
+    } catch (error) {
+      console.error('Failed to get slide:', error);
+      throw error;
+    }
+  },
+
+  // Health check
+  async checkHealth() {
+    try {
+      return await makeRequest('/api/health');
+    } catch (error) {
+      console.error('Health check failed:', error);
+      throw error;
+    }
   }
 };
 
